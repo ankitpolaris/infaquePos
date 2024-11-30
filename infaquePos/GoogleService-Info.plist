@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>313548921680-qo0a24nnmu0qj8ucs15n076jkdkag2vl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.313548921680-qo0a24nnmu0qj8ucs15n076jkdkag2vl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD9-wsMd-2NXvPZLclIf96f0gojrc3CYek</string>
+	<key>GCM_SENDER_ID</key>
+	<string>313548921680</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.infaque.app</string>
+	<key>PROJECT_ID</key>
+	<string>infaque-ios-sample</string>
+	<key>STORAGE_BUCKET</key>
+	<string>infaque-ios-sample.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:313548921680:ios:a24f90d485324acd33aa55</string>
+</dict>
+</plist>
