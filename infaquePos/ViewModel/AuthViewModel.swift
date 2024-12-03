@@ -8,7 +8,12 @@
 import Foundation
 import FirebaseAuth
 
-
+struct LoginRequestModel: Codable {
+    var userId: String?
+    var email: String?
+    var password: String?
+    var fullName: String?
+}
 
 class AuthViewModel: ObservableObject {
     @Published var user: User?
@@ -18,16 +23,28 @@ class AuthViewModel: ObservableObject {
         self.user = Auth.auth().currentUser
     }
     
-    func signIn(email: String, password: String, completion: @escaping (Bool) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                self.errorMessage = error.localizedDescription
-                completion(false)
-            } else {
-                self.user = result?.user
-                UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                completion(true)
-            }
+//    func signIn(email: String, password: String, completion: @escaping (Bool) -> Void) {
+//        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+//            if let error = error {
+//                self.errorMessage = error.localizedDescription
+//                completion(false)
+//            } else {
+//                self.user = result?.user
+//                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+//                completion(true)
+//            }
+//        }
+//    }
+    
+    func signIn(email: String, password: String) async -> Bool {
+        do {
+            let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.user = authResult.user
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            return true
+        } catch {
+            self.errorMessage = error.localizedDescription
+            return false
         }
     }
     

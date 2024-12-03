@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginWithEmailUIView: View {
     
     @StateObject private var viewModel = AuthViewModel()
+    var loginRequestModel = LoginValidationViewModel()
     @State private var email = ""
     @State private var password = ""
     @State private var isSignUp = false
@@ -84,29 +85,46 @@ struct LoginWithEmailUIView: View {
                         .padding(.bottom, 35)
                     
                     Toggle("Switch to Sign Up", isOn: $isSignUp)
-                                    .padding()
-                                    .foregroundColor(.white)
-                                    .padding(.bottom, 25)
+                        .padding()
+                        .foregroundColor(.white)
+                        .padding(.bottom, 25)
                     
                     
                     // Sign In Sign up Button
                     Button(action: {
                         
                         if isSignUp {
-                            viewModel.signUp(email: email, password: password) { success in
-                                showError = !success
-                                if success {
-                                    navigateToHomeTabBarView = true
+                            let userModel = LoginRequestModel(userId: "\(UUID())", email: email, password: password)
+                            let (isLoginValid, errorMessage) = loginRequestModel.validate(requestModel: userModel)
+                            if isLoginValid {
+                                viewModel.signUp(email: email, password: password) { success in
+                                    showError = !success
+                                    if success {
+                                        navigateToHomeTabBarView = true
+                                    }
                                 }
+                            }
+                            else {
+                                statusMessage = errorMessage ?? ""
                             }
                         } else {
-                            viewModel.signIn(email: email, password: password) { success in
-                                showError = !success
-                                print(viewModel.user?.email ?? "")
-                                if success {
-                                    navigateToHomeTabBarView = true
+                            let userModel = LoginRequestModel(userId: "\(UUID())", email: email, password: password)
+                            let (isLoginValidated, errorMessage) = loginRequestModel.validate(requestModel: userModel)
+                            if isLoginValidated {
+                                Task {
+                                    let isSuccess = await viewModel.signIn(email: email, password: password)
+                                    showError = !isSuccess
+                                    print(viewModel.user?.email ?? "")
+                                    if isSuccess {
+                                        navigateToHomeTabBarView = true
+                                    }
                                 }
                             }
+                            else {
+                                statusMessage = errorMessage ?? ""
+                            }
+
+                            
                         }
                     }) {
                         Text(isSignUp ? "Sign Up" : "Sign In")
@@ -141,7 +159,7 @@ struct LoginWithEmailUIView: View {
                 
                 .navigationDestination(isPresented: $navigateToHomeTabBarView) {
                     HomeTabBarUIView()
-
+                    
                 }
             }
         }
@@ -153,7 +171,7 @@ struct LoginWithEmailUIView: View {
         navigateToHomeTabBarView = true
     }
     
-
+    
     
     
     

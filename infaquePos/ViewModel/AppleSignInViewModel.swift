@@ -36,13 +36,15 @@ struct AppleSignInViewModel {
                 self.isLoggedIn = true
                 // Save user ID securely (e.g., Keychain)
                 print("User ID: \(userId)")
-                if let email = appleIDCredential.email {
-                    print("Email: \(email)")
-                    let userModel = UserModel(userId: userId, email: email, fullName:  "\(appleIDCredential.fullName?.givenName ?? "") \(appleIDCredential.fullName?.familyName ?? "")")
+                var userModel: UserModel
+                let email = appleIDCredential.email ?? ""
+                print("Email: \(email)")
+                let givenName = appleIDCredential.fullName?.givenName ?? ""
+                let familyName = appleIDCredential.fullName?.familyName ?? ""
+                    print("Full Name: \(givenName) \(familyName)")
+                if userId != "" {
+                    userModel = UserModel(userId: userId, email: email, fullName:  "\(appleIDCredential.fullName?.givenName ?? "") \(appleIDCredential.fullName?.familyName ?? "")")
                     completion(userModel, true)
-                }
-                if let fullName = appleIDCredential.fullName {
-                    print("Full Name: \(fullName)")
                 }
             }
         case .failure(let error):

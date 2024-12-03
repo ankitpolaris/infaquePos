@@ -81,7 +81,7 @@ struct LoginWithEmailLinkUIView: View {
                     
                     // Sign In Sign up Button
                     Button(action: {
-                        
+                        sendSignInLink()
                     
                     }) {
                         Text("Send Sign-In Link")

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 
-// {"which": "login"}
 
 struct LoginViewModel: Decodable {
     var id: String?
@@ -23,39 +22,10 @@ struct LoginResultModel: Decodable {
     var data: LoginViewModel?
 }
 
-class ViewController: UIViewController {
 
-    var httpUtility = HTTPUtility()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-    @IBAction func loginBtnTapped(_ sender: UIButton) {
-        
-        let urlString = "https://mangosoftwarelab.in/api/"
-        let param : [String: String] = ["which": "login"]
-        
-        Task {
-            do {
-                let result = try await httpUtility.apiRequestWithAsyncAwait(urlString: urlString, parameters: param, method: "POST")
-                print(result.data ?? "")
-            }
-            catch {
-                
-            }
-        }
-        
-    }
-    
-}
 
 
 class HTTPUtility: NSObject {
-    
-    
-    
     
     //  MARK: - API Request Method using Async Await
     
