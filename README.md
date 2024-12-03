@@ -1,4 +1,4 @@
-# Project Name
+# Infaque Pos
 Infaque Pos - This is a scaffoling demo project on Swift UI 
 
 ## Features
@@ -16,4 +16,4 @@ Infaque Pos - This is a scaffoling demo project on Swift UI
 ## Installation
 1. Clone the repository:
    ```bash
-#   git clone https://github.com/your-repository.git
+#   git clone https://github.com/ankitpolaris/infaquePos.git
